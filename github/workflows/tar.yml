@@ -3,24 +3,24 @@ name: Build Tarball
 on:
   push:
     branches:
-      - branchAutomake
+      - branchAutomake  # Убедитесь, что эта ветка существует
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Убедитесь, что CI будет запускаться на Ubuntu
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2  # Проверка кода из репозитория
 
       - name: Install dependencies
-        run: sudo apt-get install automake autoconf
+        run: sudo apt-get install -y automake autoconf  # Устанавливаем необходимые зависимости
 
       - name: Run autogen
-        run: autoreconf -i
+        run: autoreconf -i  # Запуск автогенерации конфигурационных файлов
 
       - name: Configure
-        run: ./configure
+        run: ./configure  # Запуск конфигурации
 
       - name: Build and create tarball
-        run: make dist
+        run: make dist  # Сборка tarball
